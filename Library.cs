@@ -163,15 +163,15 @@ namespace Inlämningsuppgift3
             switch (updateChoiceByUser)
             {
                 case "1":
-                    Console.Write("Ange ny titel: ");
+                    Console.Write("Ange nytt namn: ");
                     authorToUpdate.Name = Console.ReadLine()!;
                     break;
                 case "2":
-                    Console.Write("Ange ny genre: ");
+                    Console.Write("Ange nytt ID: ");
                     authorToUpdate.Id = Convert.ToInt32(Console.ReadLine()!);
                     break;
                 case "3":
-                    Console.Write("Ange nytt publiceringsår: ");
+                    Console.Write("Ange nytt land: ");
                     authorToUpdate.Country = (Console.ReadLine())!;
                     break;
                 default:
@@ -255,7 +255,7 @@ namespace Inlämningsuppgift3
                     }
                     break;
                 case "2":
-                    Console.Write("Välj det vilket genomsnitligt betyg boken lägst ska ha mellan 1-5:");
+                    Console.Write("Välj vilket genomsnitligt betyg boken lägst ska ha mellan 1-5:");
                     int minRatingByUser = Convert.ToInt32(Console.ReadLine()!);
 
                     Console.WriteLine($"Böcker med ett genomslittligt betyg på {minRatingByUser} eller högre:");
