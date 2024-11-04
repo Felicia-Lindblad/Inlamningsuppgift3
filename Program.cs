@@ -16,8 +16,10 @@ namespace Inlämningsuppgift3
 
             Library library = new Library();
 
+            bool running = true;
+
             Console.WriteLine("Välkommen till det lilla Bilioteket");
-            while (true)
+            while (running)
             {
                 Console.WriteLine("--------------------------------------------");
                 Console.WriteLine("1. Lägg till en ny bok");
@@ -75,7 +77,7 @@ namespace Inlämningsuppgift3
                         Console.Clear();
                         Console.WriteLine("Avslutar...");
                         SaveNewDataToJSONFile(miniDB, dataJSONFilePath);
-                        Environment.Exit(0);
+                        running = false;
                         break;
                     default:
                         Console.Clear();
