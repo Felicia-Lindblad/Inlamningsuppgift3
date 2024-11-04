@@ -7,7 +7,11 @@
       "YearPublished": 2008,
       "ISBN": 11,
       "Rating": [ 3, 4, 3, 3, 5 ],
-      "AuthorID": 9
+      "Author": {
+        "Id": 9,
+        "Name": "J.R.R Tolkien",
+        "Country": "Great Britian"
+      }
     },
     {
       "Id": 2,
@@ -16,7 +20,11 @@
       "YearPublished": 2003,
       "ISBN": 22,
       "Rating": [ 2, 3, 3, 4, 1 ],
-      "AuthorID": 8
+      "Author": {
+        "Id": 8,
+        "Name": "Lewis Carol",
+        "Country": "Great Britian"
+      }
     },
     {
       "Id": 3,
@@ -25,34 +33,11 @@
       "YearPublished": 2013,
       "ISBN": 33,
       "Rating": [ 4, 4, 5, 3, 2 ],
-      "AuthorID": 7
-    },
-    {
-      "Id": 4,
-      "Title": "Anabelle",
-      "Genre": "Skräck",
-      "YearPublished": 2017,
-      "ISBN": 44,
-      "Rating": [ 2, 2, 5, 3, 4 ],
-      "AuthorID": 6
-    },
-    {
-      "Id": 5,
-      "Title": "Pepparkakshuset",
-      "Genre": "Däckare",
-      "YearPublished": 2016,
-      "Isbn": 55,
-      "Rating": [ 4, 4, 3, 4, 5 ],
-      "AuthorID": 5
-    },
-    {
-      "Id": 6,
-      "Title": "Mamma, Pappa, Barn",
-      "Genre": "Däckare",
-      "YearPublished": 2017,
-      "ISBN": 66,
-      "Rating": [ 3, 4, 3, 3, 5 ],
-      "AuthorID": 5
+      "Author": {
+        "Id": 8,
+        "Name": "Lewis Carol",
+        "Country": "Great Britian"
+      }
     }
   ],
   "Authors": [
@@ -65,21 +50,6 @@
       "Id": 8,
       "Name": "Lewis Carol",
       "Country": "Great Britian"
-    },
-    {
-      "Id": 7,
-      "Name": "Jojo Moyes",
-      "Country": "Great Britian"
-    },
-    {
-      "Id": 6,
-      "Name": "Lina Bengtsdotter",
-      "Country": "Sweden"
-    },
-    {
-      "Id": 5,
-      "Name": "Carin Gerhardsen",
-      "Country": "Sweden"
     }
   ]
 }

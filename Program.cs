@@ -39,7 +39,7 @@ namespace Inlämningsuppgift3
                 {
                     case "1":
                         Console.Clear();
-                        library.AddNewBook(miniDB.AllBooksFromListInJSON);                        
+                        library.AddNewBook(miniDB.AllBooksFromListInJSON, miniDB.AllAuthorsFromJson);                        
                         break;
                     case "2":
                         Console.Clear();

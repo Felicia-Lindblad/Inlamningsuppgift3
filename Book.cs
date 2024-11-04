@@ -13,20 +13,18 @@ namespace Inlämningsuppgift3
         public string Genre { get; set; }
         public int YearPublished { get; set; }
         public int ISBN { get; set; }
-        public List<double> Rating { get; set; }
-        public int AuthorID { get; set; }
+        public List<int> Rating { get; set; }
+        public Author Author { get; set; }
 
-        Author Author { get; set; }
-
-        public Book (int id, string title, string genre, int yearpublished,  int isbn, int authorID)
+        public Book (string title, int id, string genre, int yearpublished, int isbn, Author author, List<int> rating)
         {
-            Id = id;
             Title = title;
+            Id = id;
             Genre = genre;
             YearPublished = yearpublished;
             ISBN = isbn;
-            AuthorID = authorID;
-            Rating = new List<double>();
+            Author = author;
+            Rating = rating;
         }
     }
 }

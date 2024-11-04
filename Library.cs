@@ -38,35 +38,49 @@ namespace Inlämningsuppgift3
                     Console.WriteLine($"Tack! Ditt betyg {newRating} har lagts till för boken '{chosenBook.Title}'.");
                 }
             }
-
         }
-        public void AddNewBook(List<Book> allBooks)
+
+        public void AddNewBook(List<Book> allBooks, List<Author> allAuthors)
         {
-            Console.Write("Bokens titel: ");
+            Console.Write("Titel:");
             string titleForNewBook = Console.ReadLine()!;
-            Console.Write("Bokens ID: ");
-            int idForNewBook = Convert.ToInt32(Console.ReadLine())!;
-            Console.Write("Bokens genre: ");
+            Console.Write("ID:");
+            int IDForNewBook = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Genre:");
             string genreForNewBook = Console.ReadLine()!;
-            Console.Write("Bokens publisering år: ");
-            int yearpublishedForNewBook = Convert.ToInt32(Console.ReadLine())!;
-            Console.Write("Bokens ISBN: ");
+            Console.Write("Publiceringsår:");
+            int yearPublishedForNewBook = Convert.ToInt32(Console.ReadLine())!;
+            Console.Write("ISBN:");
             int isbnForNewBook = Convert.ToInt32(Console.ReadLine())!;
-            Console.Write("ID för bokens författare: ");
-            int AuthorIDForNewBook = Convert.ToInt32(Console.ReadLine())!;
+            Console.Write("Betyg 1 till 5:");
+            int ratingForNewBook = Convert.ToInt32(Console.ReadLine())!;
+            Console.Write("Författare:");
+            string authorForNewBook = Console.ReadLine()!;
 
-            Book newBookToAdd = new Book(idForNewBook, titleForNewBook, genreForNewBook, yearpublishedForNewBook, isbnForNewBook, AuthorIDForNewBook);
-            bool isbnAlreadyExcist = allBooks.Any(book => book.ISBN == newBookToAdd.ISBN);
+            Author? authorOfNewBook = allAuthors.FirstOrDefault(author => author.Name.Equals(authorForNewBook, StringComparison.OrdinalIgnoreCase));
 
-            if (isbnAlreadyExcist)
+            if (authorOfNewBook == null)
             {
-                Console.WriteLine($"En bok med ISBN {isbnForNewBook} finns redan");
+                Console.WriteLine("Författaren hittades inte. Du behöver lägga till denna författare");
+                AddNewAuthor(allAuthors);
+
+                authorOfNewBook = allAuthors.FirstOrDefault(author => author.Name.Equals(authorForNewBook, StringComparison.OrdinalIgnoreCase));
+
+                if (authorOfNewBook == null)
+                {
+                    Console.WriteLine("Kunde inte hitta eller lägga till författaren.");
+                    return;
+                }
             }
-            else
-            {
-                allBooks.Add(newBookToAdd);
-                Console.WriteLine("Boken har lagts till i biblioteket.");
-            }
+
+            List<int> bookRating = new List<int>();
+            bookRating.Add(ratingForNewBook);
+
+            Book newBook = new Book(titleForNewBook, IDForNewBook, genreForNewBook, yearPublishedForNewBook, isbnForNewBook, authorOfNewBook!, bookRating);
+
+            allBooks.Add(newBook);
+
+            Console.WriteLine($"Boken \"{titleForNewBook}\" har lagts till!");
         }
 
         public void AddNewAuthor(List<Author> allAuthors)
@@ -142,11 +156,11 @@ namespace Inlämningsuppgift3
         public void UpdateAuthorDetails(List<Author> allAuthors)
         {
             Console.WriteLine("Vilken författare vill du uppdatera?");
-            allAuthors.ForEach(author => Console.WriteLine($"ID: {author.Id} Namn: {author.Name}"));
+            allAuthors.ForEach(author => Console.WriteLine($"Namn: {author.Name}"));
 
-            Console.Write("Skriv in författarID på den författare du vill uppdatera:");
-            int authorToUpdateByID = Convert.ToInt32(Console.ReadLine())!;
-            var authorToUpdate = allAuthors.FirstOrDefault(author => author.Id == authorToUpdateByID);
+            Console.Write("Skriv in namn på den författare du vill uppdatera:");
+            string authorToUpdate = (Console.ReadLine())!;
+            var updateAthor = allAuthors.FirstOrDefault(author => author.Name == authorToUpdate);
 
             if (authorToUpdate == null)
             {
@@ -164,15 +178,15 @@ namespace Inlämningsuppgift3
             {
                 case "1":
                     Console.Write("Ange nytt namn: ");
-                    authorToUpdate.Name = Console.ReadLine()!;
+                    updateAthor.Name = Console.ReadLine()!;
                     break;
                 case "2":
                     Console.Write("Ange nytt ID: ");
-                    authorToUpdate.Id = Convert.ToInt32(Console.ReadLine()!);
+                    updateAthor.Id = Convert.ToInt32(Console.ReadLine()!);
                     break;
                 case "3":
                     Console.Write("Ange nytt land: ");
-                    authorToUpdate.Country = (Console.ReadLine())!;
+                    updateAthor.Country = (Console.ReadLine())!;
                     break;
                 default:
                     Console.WriteLine("Ogiltigt val.");
@@ -218,15 +232,48 @@ namespace Inlämningsuppgift3
         public void ListAllBooksAndAuthors(List<Book> allBooks, List<Author> allAuthors)
         {
             Console.WriteLine("Böcker:");
-            allBooks.ForEach(book => { double averageRatingForEachBook = book.Rating.Count > 0 ? book.Rating.Average() : 0;
-            Console.WriteLine($"ID: {book.Id} Titel: {book.Title} Genre: {book.Genre} Year Published: {book.YearPublished} ISBN: {book.ISBN} Genomsnittligt betyg: {averageRatingForEachBook}");
-            });
+            allBooks.ForEach(book =>
+            {
+                var averageRatingForEachBook = book.Rating.Count > 0 ? book.Rating.Average() : 0;
+                Console.WriteLine($"Titel: {book.Title}");
+                Console.WriteLine($"ID: {book.Id}");
+                Console.WriteLine($"Genre: {book.Genre}");
+                Console.WriteLine($"Publiceringsår: {book.YearPublished}");
+                Console.WriteLine($"ISBN: {book.ISBN}");
+                Console.WriteLine($"Genomsnittligt betyg: {averageRatingForEachBook}");
+                Console.WriteLine("---------------------------------");
 
-            Console.WriteLine("Författare:");
-            allAuthors.ForEach(author => {
-                var booksByAuthor = allBooks.Where(book => book.AuthorID == author.Id);
-                string bookTitles = string.Join(", ", booksByAuthor.Select(book => book.Title));
-                Console.WriteLine($"ID: {author.Id} Namn: {author.Name} Land: {author.Country} Skrivna böcker: {bookTitles}");
+            });
+            allAuthors.ForEach(author =>
+            {
+                Console.WriteLine("Författare:");
+                Console.WriteLine($"Namn: {author.Name}");
+                Console.WriteLine($"ID: {author.Id}");
+                Console.WriteLine($"Land: {author.Country}");
+
+                var writtenBooksByAuthor = allBooks.Where(book => book.Author != null && book.Author.Id == author.Id).ToList();
+
+                if (writtenBooksByAuthor.Count > 0)
+                {
+                    foreach (var book in writtenBooksByAuthor)
+                    {
+                        var averageRatingForEachBook = book.Rating.Count > 0 ? book.Rating.Average() : 0;
+
+                        Console.WriteLine("Skrivna Böcker:");
+                        Console.WriteLine($"Titel: {book.Title}");
+                        Console.WriteLine($"ID: {book.Id}");
+                        Console.WriteLine($"Genre: {book.Genre}");
+                        Console.WriteLine($"Publiseringsår: {book.YearPublished}");
+                        Console.WriteLine($"ISBN: {book.ISBN}");
+                        Console.WriteLine($"Genomsnittligt betyg: {averageRatingForEachBook:F1}");
+                        Console.WriteLine("---------------------------------");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Inga skrivna böcker hittades.");
+                    Console.WriteLine("---------------------------------");
+                }
             });
         }
         public void SerchForAndFilterBooks(List<Book> allBooks)
