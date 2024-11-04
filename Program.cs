@@ -38,40 +38,40 @@ namespace Inlämningsuppgift3
                 switch (choosedOpptionByUser)
                 {
                     case "1":
+                        library.AddNewBook(miniDB.AllBooksFromListInJSON, miniDB.AllAuthorsFromJson);
                         Console.Clear();
-                        library.AddNewBook(miniDB.AllBooksFromListInJSON, miniDB.AllAuthorsFromJson);                        
                         break;
                     case "2":
-                        Console.Clear();
                         library.AddNewAuthor(miniDB.AllAuthorsFromJson);
+                        Console.Clear();
                         break;
                     case "3":
-                        Console.Clear();
                         library.UpdateBookDetails(miniDB.AllBooksFromListInJSON);
+                        Console.Clear();
                         break;
                     case "4":
-                        Console.Clear();
                         library.UpdateAuthorDetails(miniDB.AllAuthorsFromJson);
+                        Console.Clear();
                         break;
                     case "5":
-                        Console.Clear();
                         library.RemoveBookFromList(miniDB.AllBooksFromListInJSON);
+                        Console.Clear();
                         break;
                     case "6":
-                        Console.Clear();
                         library.RemoveAuthorFromList(miniDB.AllAuthorsFromJson);
+                        Console.Clear();
                         break;
                     case "7":
-                        Console.Clear();
                         library.ListAllBooksAndAuthors(miniDB.AllBooksFromListInJSON, miniDB.AllAuthorsFromJson);
+                        Console.Clear();
                         break;
                     case "8":
-                        Console.Clear();
                         library.SerchForAndFilterBooks(miniDB.AllBooksFromListInJSON);
+                        Console.Clear();
                         break;
                     case "9":
-                        Console.Clear();
                         library.RateABook(miniDB.AllBooksFromListInJSON);
+                        Console.Clear();
                         break;
                     case "10":
                         Console.Clear();
